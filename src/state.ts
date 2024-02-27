@@ -181,7 +181,9 @@ export const useAction = (action: string): any => {
                     }, []);
                     set(appState.templates, updatedTemplates)
                     toast.success("Propmpt Copied to Clipboard");
-                }    
+                }   
+                console.log('final workspaces',get(appState.templates));
+
             });
         }
 
@@ -298,8 +300,7 @@ export const useAction = (action: string): any => {
                     currentValues: get(appState.currentValues)
                 }
                 const result = JSON.stringify(state);
-                console.log('save_workspace')
-                console.log(result)
+                
                 return result;
             })
         }
