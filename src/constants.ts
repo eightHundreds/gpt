@@ -88,7 +88,7 @@ const FORMATS: Array<string> = [
     "PDF"
 ];
 
-export const PROMPT_TEMPLATE: ITemplate = {
+export const PROMPT_TEMPLATE: ITemplate = window.prompt_template ?? {
     name: "Main Template",
     id: crypto.randomUUID(),
     promptVariableAttributes: {
