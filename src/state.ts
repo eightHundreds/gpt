@@ -297,7 +297,10 @@ export const useAction = (action: string): any => {
                     loadedExampleId: get(appState.loadedExampleId),
                     currentValues: get(appState.currentValues)
                 }
-                return JSON.stringify(state);
+                const result = JSON.stringify(state);
+                console.log('save_workspace')
+                console.log(result)
+                return result;
             })
         }
     }

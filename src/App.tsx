@@ -272,6 +272,7 @@ function Header() {
   let setFileHandle = useSetAtom(openFileHandleAtom);
   let loadWorkspace = useSetAtom(state.useAction("load_workspace"));
   let saveWorkspace = useSetAtom(state.useAction("save_workspace"));
+  
   useEffect(()=>{
     //@ts-ignore
     if(window.workspace){
@@ -281,6 +282,7 @@ function Header() {
       },500)
     }
   },[])
+
   const handleWorkspaceMenuActions = 
         (key: any, label: any) => onWorkspaceMenuItemClick(key, label, loadWorkspace, saveWorkspace, setFileHandle)
 
