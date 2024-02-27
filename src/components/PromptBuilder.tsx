@@ -125,7 +125,7 @@ function getPopupContainer(trigger: any) {
 // }
 
 function BlockElement(props: BlockElementProps) {
-    let component = props.promptVarAttributes?.getComponent() || "text";
+    let component = props.promptVarAttributes?.getComponent?.() || "text";
 
     let attr = props.promptVarAttributes;
     let value = useCurrentValue(props.promptVar);

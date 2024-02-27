@@ -3,7 +3,7 @@ import './App.css';
 import Trigger from '@rc-component/trigger';
 import copy from 'copy-to-clipboard';
 import { useSetAtom } from "jotai"
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import {Toaster, toast} from "react-hot-toast";
 import Modal from "react-modal"
 
@@ -13,7 +13,7 @@ import { Menu } from "./components/Menu"
 import { PromptBuilder } from "./components/PromptBuilder"
 import { TemplateBuilder, setModalOpenAtom, compilePrompt } from "./components/TemplateBuilder"
 import * as state from "./state";
-import { WorkspaceMenuOptions, openFileHandleAtom, onWorkspaceMenuItemClick} from "./Workspace"
+import { WorkspaceMenuOptions, openFileHandleAtom, onWorkspaceMenuItemClick,hydrateWorkspace} from "./Workspace"
 
 
 function PipeSeparator() {
@@ -272,13 +272,15 @@ function Header() {
   let setFileHandle = useSetAtom(openFileHandleAtom);
   let loadWorkspace = useSetAtom(state.useAction("load_workspace"));
   let saveWorkspace = useSetAtom(state.useAction("save_workspace"));
-  //@ts-ignore
-  if(window.workspace){
-    setTimeout(()=>{
-      // @ts-ignore
-      loadWorkspace(window.workspace)
-    },500)
-  }
+  useEffect(()=>{
+    //@ts-ignore
+    if(window.workspace){
+      setTimeout(()=>{
+        // @ts-ignore
+        loadWorkspace(hydrateWorkspace(window.workspace))
+      },500)
+    }
+  },[])
   const handleWorkspaceMenuActions = 
         (key: any, label: any) => onWorkspaceMenuItemClick(key, label, loadWorkspace, saveWorkspace, setFileHandle)
 

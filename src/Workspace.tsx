@@ -23,7 +23,7 @@ function renameKeys(o: any, mapping: Record<string, string>) {
     renameKey(o, k, mapping[k])
 }
 
-function hydrateWorkspace(wspc: any) {
+export function hydrateWorkspace(wspc: any) {
   let keyMapping: Record<string, any> = { "loaded-example-id": "loadedExampleId",
                                           "template-index": "templateIndex",
                                           "values": "currentValues"}
