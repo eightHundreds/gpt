@@ -88,6 +88,7 @@ const FORMATS: Array<string> = [
     "PDF"
 ];
 
+// @ts-ignore
 export const PROMPT_TEMPLATE: ITemplate = window.prompt_template ?? {
     name: "Main Template",
     id: crypto.randomUUID(),
