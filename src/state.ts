@@ -182,7 +182,14 @@ export const useAction = (action: string): any => {
                     set(appState.templates, updatedTemplates)
                     toast.success("Propmpt Copied to Clipboard");
                 }   
-                console.log('final workspaces',get(appState.templates));
+                console.log('final workspaces',
+                {
+                    templates: get(appState.templates),
+                    templateIndex: get(appState.templateIndex),
+                    loadedExampleId: get(appState.loadedExampleId),
+                    currentValues: get(appState.currentValues)
+                }
+                );
 
             });
         }
