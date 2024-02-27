@@ -54,8 +54,8 @@ export function lex(st: string) {
     let isBrEnd   = (charPos: number) => st[charPos] === ">" && isInBr()
     let isNewLine = (charPos: number) => st[charPos] === "\n"
 
-    let isBlockStart = (charPos: number) => st[charPos] === "["
-    let isBlockEnd = (charPos: number) => st[charPos] === "]"
+    let isBlockStart = (charPos: number) => st[charPos] === "[" && st[charPos-1]!=="\\"
+    let isBlockEnd = (charPos: number) => st[charPos] === "]" && st[charPos-1]!=="\\"
 
     let isVariableStart = (charPos: number) => st[charPos] === "$"
     let isVariableEnd = (charPos: number) => {
@@ -63,6 +63,8 @@ export function lex(st: string) {
                                          "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "=", "+", "\n"]);
         return isInVaraible() && varDelimiterSet.has(st[charPos]);
     }
+
+    let isEscapeChar = (charPos:number) => st[charPos] === "\\" && ['[',']'].includes(st[charPos+1])
 
     for(let i=0; i < st.length; i++) {
         let currentChar = st[i];
@@ -106,7 +108,9 @@ export function lex(st: string) {
                 blockToTemplate();
                 break;
             case isInBlock() || isInVaraible() || isInBr():
-                insertBlockCtxChar(currentChar);
+                if(!isEscapeChar(i)){
+                    insertBlockCtxChar(currentChar);
+                }
                 break
         }    
     }
