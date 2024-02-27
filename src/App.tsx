@@ -272,7 +272,13 @@ function Header() {
   let setFileHandle = useSetAtom(openFileHandleAtom);
   let loadWorkspace = useSetAtom(state.useAction("load_workspace"));
   let saveWorkspace = useSetAtom(state.useAction("save_workspace"));
-
+  //@ts-ignore
+  if(window.workspace){
+    setTimeout(()=>{
+      // @ts-ignore
+      loadWorkspace(window.workspace)
+    },500)
+  }
   const handleWorkspaceMenuActions = 
         (key: any, label: any) => onWorkspaceMenuItemClick(key, label, loadWorkspace, saveWorkspace, setFileHandle)
 
