@@ -88,13 +88,14 @@ export const setModalOpenAtom = atom(
 );
 
 function extractVariables(template: Array<any>): any {
-    return template.reduce(
+    const result =  template.reduce(
             (acc: Array<any>, block: any) => {
                 let pVar = block?.filter( isPv )[0];
                 if (pVar) acc.push(pVar.variable);
                 return acc;
             }, 
             []);
+    return Array.from(new Set(result));
 }
 
 const hydrateVariableAttributes = (template: Array<any>, variableAttributes: Record<string, any>): Record<string, PromptVariableAttribute> => {
